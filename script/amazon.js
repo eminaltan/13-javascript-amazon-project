@@ -103,5 +103,3 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
     }, 2000);
   });
 });
-
-
