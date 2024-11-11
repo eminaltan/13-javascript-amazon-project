@@ -1,3 +1,5 @@
+import { cart, products } from "../data/products.js";
+
 let productHTML = "";
 
 products.forEach((element) => {
@@ -101,5 +103,7 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
     setTimeout(() => {
       addedMessage.classList.remove("added-to-cart-visible");
     }, 2000);
+
+    localStorage.setItem("cartItems", JSON.stringify(cart));
   });
 });
