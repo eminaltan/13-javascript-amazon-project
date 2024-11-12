@@ -20,8 +20,12 @@ let listingProduct = "";
 matchingProducts.forEach((cartItem) => {
   const showQuantity = (quantity, productId) => {
     let optionElement = "";
-    for (let i = 1; i <= quantity; i++) {
-      optionElement += `<option selected value=${i}>${i}</option>`;
+    for (let i = 1; i <= 9; i++) {
+      if (i == quantity) {
+        optionElement += `<option selected value=${i}>${i}</option>`;
+      }
+
+      optionElement += `<option value=${i}>${i}</option>`;
     }
     return `<select class="js-select-quantity-${productId}">
   ${optionElement}
