@@ -1,4 +1,4 @@
-import { products } from "../data/products.js";
+import { products, showQuantity, updateQuantity } from "../data/products.js";
 
 const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
 
@@ -16,19 +16,6 @@ products.forEach((product) => {
 });
 
 let listingProduct = "";
-
-const showQuantity = (quantity) => {
-  let optionElement = "";
-  for (let i = 1; i <= 9; i++) {
-    if (i == quantity) {
-      optionElement += `<option selected value=${i}>${i}</option>`;
-      continue;
-    }
-
-    optionElement += `<option value=${i}>${i}</option>`;
-  }
-  return optionElement;
-};
 
 matchingProducts.forEach((cartItem) => {
   listingProduct += `
@@ -100,17 +87,4 @@ matchingProducts.forEach((cartItem) => {
 
 document.querySelector(".js-order-summary").innerHTML = listingProduct;
 
-// TODO: Aşağıda kod satırları update işlemi için kullanılıyor onlclick event için arrow fonksiyon oluşturmayı deneyerek yap.
-document.querySelectorAll(".js-update-quantity").forEach((spanHTMLElement) => {
-  spanHTMLElement.addEventListener("click", () => {
-    const spanProductId = spanHTMLElement.dataset.productId;
-    const selectHTMLElement = document.querySelector(
-      `.js-select-quantity[data-product-id="${spanProductId}"]`
-    );
-
-    if (selectHTMLElement) {
-      const newQuantity = selectHTMLElement.value;
-      selectHTMLElement.innerHTML = showQuantity(newQuantity);
-    }
-  });
-});
+updateQuantity();

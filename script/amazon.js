@@ -1,4 +1,4 @@
-import { cart, products } from "../data/products.js";
+import { cart, products, saveLocalStorage } from "../data/products.js";
 
 let productHTML = "";
 
@@ -57,10 +57,6 @@ products.forEach((element) => {
 });
 
 document.querySelector(".js-products-grid").innerHTML = productHTML;
-
-const saveLocalStorage = () => {
-  localStorage.setItem("cartItems", JSON.stringify(cart));
-};
 
 document.querySelectorAll(".js-add-to-cart").forEach((button) => {
   button.addEventListener("click", () => {
