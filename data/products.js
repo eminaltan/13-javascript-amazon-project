@@ -531,3 +531,7 @@ export const updateQuantity = () => {
 export const saveLocalStorage = () => {
   localStorage.setItem("cartItems", JSON.stringify(cart));
 };
+
+export const getLocalStorage = () => {
+  cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+};
