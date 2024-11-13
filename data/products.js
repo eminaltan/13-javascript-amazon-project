@@ -528,6 +528,6 @@ export const updateQuantity = () => {
     });
 };
 
-const saveLocalStorage = () => {
+export const saveLocalStorage = () => {
   localStorage.setItem("cartItems", JSON.stringify(cart));
 };
