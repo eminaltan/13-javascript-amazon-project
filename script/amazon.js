@@ -58,7 +58,7 @@ products.forEach((element) => {
 
 document.querySelector(".js-products-grid").innerHTML = productHTML;
 
-const saveCartItem = () => {
+const saveLocalStorage = () => {
   localStorage.setItem("cartItems", JSON.stringify(cart));
 };
 
@@ -106,6 +106,6 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
       addedMessage.classList.remove("added-to-cart-visible");
     }, 2000);
 
-    saveCartItem();
+    saveLocalStorage();
   });
 });
