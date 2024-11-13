@@ -1,11 +1,17 @@
-import { products, showQuantity, updateQuantity } from "../data/products.js";
+import {
+  getLocalStorage,
+  products,
+  showQuantity,
+  updateQuantity,
+  cart,
+} from "../data/products.js";
 
-const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+getLocalStorage();
 
 let matchingProducts = [];
 
 products.forEach((product) => {
-  const matchingItem = cartItems.find((item) => item.productId === product.id);
+  const matchingItem = cart.find((item) => item.productId === product.id);
 
   if (matchingItem) {
     matchingProducts.push({
