@@ -17,20 +17,20 @@ products.forEach((product) => {
 
 let listingProduct = "";
 
-matchingProducts.forEach((cartItem) => {
-  const showQuantity = (quantity) => {
-    let optionElement = "";
-    for (let i = 1; i <= 9; i++) {
-      if (i == quantity) {
-        optionElement += `<option selected value=${i}>${i}</option>`;
-        continue;
-      }
-
-      optionElement += `<option value=${i}>${i}</option>`;
+const showQuantity = (quantity) => {
+  let optionElement = "";
+  for (let i = 1; i <= 9; i++) {
+    if (i == quantity) {
+      optionElement += `<option selected value=${i}>${i}</option>`;
+      continue;
     }
-    return optionElement;
-  };
 
+    optionElement += `<option value=${i}>${i}</option>`;
+  }
+  return optionElement;
+};
+
+matchingProducts.forEach((cartItem) => {
   listingProduct += `
     <div class="cart-item-container">
       <div class="delivery-date">Delivery date: Wednesday, June 15</div>
@@ -48,17 +48,17 @@ matchingProducts.forEach((cartItem) => {
           <div class="product-quantity">
             <span> Quantity: <span class="quantity-label">
             
-            
-            <select class="js-select-quantity-${cartItem.product.id}">
-              ${showQuantity(cartItem.quantity)}
+            <select class="js-select-quantity" data-product-id =${
+              cartItem.product.id
+            }>
+            ${showQuantity(cartItem.quantity)}
             </select>
             
             </span> </span>
 
-            /* TODO: Ürünleri update etmek için fonksiyon oluştur. */
-            <span class="update-quantity-link link-primary js-update-quantity" data-product-quantity =${
-              cartItem.quantity
-            }}>Update</span>
+            <span class="update-quantity-link link-primary js-update-quantity" data-product-id=${
+              cartItem.product.id
+            }>Update</span>
             <span class="delete-quantity-link link-primary">Delete</span>
           </div>
         </div>
@@ -100,12 +100,17 @@ matchingProducts.forEach((cartItem) => {
 
 document.querySelector(".js-order-summary").innerHTML = listingProduct;
 
-/* document.querySelectorAll(".js-update-quantity").forEach((spanElement) => {
-  spanElement.addEventListener("click", (productId) => {
-    const jsSelectQuantity = document.querySelector(
-      `.js-select-quantity-${productId}`
+// TODO: Aşağıda kod satırları update işlemi için kullanılıyor onlclick event için arrow fonksiyon oluşturmayı deneyerek yap.
+document.querySelectorAll(".js-update-quantity").forEach((spanHTMLElement) => {
+  spanHTMLElement.addEventListener("click", () => {
+    const spanProductId = spanHTMLElement.dataset.productId;
+    const selectHTMLElement = document.querySelector(
+      `.js-select-quantity[data-product-id="${spanProductId}"]`
     );
-    console.log(jsSelectQuantity.value);
+
+    if (selectHTMLElement) {
+      const newQuantity = selectHTMLElement.value;
+      selectHTMLElement.innerHTML = showQuantity(newQuantity);
+    }
   });
 });
- */
