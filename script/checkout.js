@@ -18,18 +18,17 @@ products.forEach((product) => {
 let listingProduct = "";
 
 matchingProducts.forEach((cartItem) => {
-  const showQuantity = (quantity, productId) => {
+  const showQuantity = (quantity) => {
     let optionElement = "";
     for (let i = 1; i <= 9; i++) {
       if (i == quantity) {
         optionElement += `<option selected value=${i}>${i}</option>`;
+        continue;
       }
 
       optionElement += `<option value=${i}>${i}</option>`;
     }
-    return `<select class="js-select-quantity-${productId}">
-  ${optionElement}
-  </select>`;
+    return optionElement;
   };
 
   listingProduct += `
@@ -47,10 +46,14 @@ matchingProducts.forEach((cartItem) => {
             cartItem.product.priceCents / 100
           ).toFixed(2)}</div>
           <div class="product-quantity">
-            <span> Quantity: <span class="quantity-label">${showQuantity(
-              cartItem.quantity,
-              cartItem.product.id
-            )}</span> </span>
+            <span> Quantity: <span class="quantity-label">
+            
+            
+            <select class="js-select-quantity-${cartItem.product.id}">
+              ${showQuantity(cartItem.quantity)}
+            </select>
+            
+            </span> </span>
 
             /* TODO: Ürünleri update etmek için fonksiyon oluştur. */
             <span class="update-quantity-link link-primary js-update-quantity" data-product-quantity =${
