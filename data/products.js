@@ -523,6 +523,14 @@ export const updateQuantity = () => {
         if (selectHTMLElement) {
           const newQuantity = selectHTMLElement.value;
           selectHTMLElement.innerHTML = showQuantity(newQuantity);
+
+          cart.forEach((cartItem) => {
+            if (cartItem.productId == spanProductId) {
+              cartItem.quantity = Number(newQuantity);
+            }
+          });
+
+          saveLocalStorage();
         }
       });
     });
