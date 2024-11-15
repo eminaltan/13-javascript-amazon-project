@@ -527,6 +527,16 @@ export const updateQuantity = () => {
           cart.forEach((cartItem) => {
             if (cartItem.productId == spanProductId) {
               cartItem.quantity = Number(newQuantity);
+
+              // products içerisindeki id ile cart içerisindeki id uyuşması durumunda fiyatta güncellme için gerekli price ve quantity bilgilerini productPrice() methoduna gönderiyorum.
+              products.forEach((productItem) => {
+                if (productItem.id == cartItem.productId)
+                  productPrice(
+                    productItem.priceCents,
+                    newQuantity,
+                    cartItem.productId
+                  );
+              });
             }
           });
 
@@ -536,8 +546,26 @@ export const updateQuantity = () => {
     });
 };
 
-export const productPrice = (productPrice) => {
-  return `$${(productPrice / 100).toFixed(2)}`;
+export const productPrice = (productPrice, quantity, productId) => {
+  let result = ((productPrice * quantity) / 100).toFixed(2);
+
+  const jsProductPrice = document.querySelector(
+    `.js-product-price-${productId}`
+  );
+
+  if (quantity === undefined) {
+    // İlk render sırasında
+    return `$${(productPrice / 100).toFixed(2)}`;
+  }
+
+  if (jsProductPrice) {
+    // checkout.js'de jsProductPrice güncellendiğinde
+    jsProductPrice.innerText = result;
+    return result;
+  }
+
+  // jsProductPrice mevcut değilse
+  return result;
 };
 
 export const saveLocalStorage = () => {
