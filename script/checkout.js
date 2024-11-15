@@ -4,6 +4,7 @@ import {
   showQuantity,
   updateQuantity,
   cart,
+  productPrice,
 } from "../data/products.js";
 
 getLocalStorage();
@@ -35,9 +36,9 @@ matchingProducts.forEach((cartItem) => {
 
         <div class="cart-item-details">
           <div class="product-name">${cartItem.product.name}</div>
-          <div class="product-price">$${(
-            cartItem.product.priceCents / 100
-          ).toFixed(2)}</div>
+          <div class="product-price">
+          ${productPrice(cartItem.product.priceCents)}
+          </div>
           <div class="product-quantity">
             <span> Quantity: <span class="quantity-label">
             

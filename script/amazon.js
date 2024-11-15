@@ -1,4 +1,9 @@
-import { cart, products, saveLocalStorage } from "../data/products.js";
+import {
+  cart,
+  productPrice,
+  products,
+  saveLocalStorage,
+} from "../data/products.js";
 
 let productHTML = "";
 
@@ -24,14 +29,12 @@ products.forEach((element) => {
             <div class="product-rating-count link-primary">56</div>
           </div>
 
-          <div class="product-price">$${(element.priceCents / 100).toFixed(
-            2
-          )}</div>
+          <div class="product-price">${productPrice(element.priceCents)}</div>
 
           <div class="product-quantity-container">
             <select class ="js-quantity-selector-${element.id}">
               <option selected value="1">1</option>
-              <option value="2">2</option>
+              <option value="2">2</option>z
               <option value="3">3</option>
               <option value="4">4</option>
               <option value="5">5</option>

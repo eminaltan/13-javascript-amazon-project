@@ -536,6 +536,10 @@ export const updateQuantity = () => {
     });
 };
 
+export const productPrice = (productPrice) => {
+  return `$${(productPrice / 100).toFixed(2)}`;
+};
+
 export const saveLocalStorage = () => {
   localStorage.setItem("cartItems", JSON.stringify(cart));
 };
