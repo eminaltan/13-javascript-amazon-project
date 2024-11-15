@@ -36,8 +36,8 @@ matchingProducts.forEach((cartItem) => {
 
         <div class="cart-item-details">
           <div class="product-name">${cartItem.product.name}</div>
-          <div class="product-price">
-          ${productPrice(cartItem.product.priceCents)}
+          <div class="product-price js-product-price">
+          ${productPrice(cartItem.product.priceCents, cartItem.quantity)}
           </div>
           <div class="product-quantity">
             <span> Quantity: <span class="quantity-label">
