@@ -5,6 +5,7 @@ import {
   updateQuantity,
   cart,
   productPrice,
+  orderSummary,
 } from "../data/products.js";
 
 getLocalStorage();
@@ -26,7 +27,7 @@ let listingProduct = "";
 
 matchingProducts.forEach((cartItem) => {
   listingProduct += `
-    <div class="cart-item-container">
+    <div class="cart-item-container js-item-container">
       <div class="delivery-date">Delivery date: Wednesday, June 15</div>
 
       <div class="cart-item-details-grid">
@@ -99,3 +100,4 @@ matchingProducts.forEach((cartItem) => {
 document.querySelector(".js-order-summary").innerHTML = listingProduct;
 
 updateQuantity();
+orderSummary();
