@@ -1,3 +1,5 @@
+// TODO: Delete işlemi için method oluştur.
+
 export let cart = [];
 export const products = [
   {
@@ -496,6 +498,53 @@ export const products = [
   },
 ];
 
+export const orderSummary = () => {
+  /* Kaç tür ürünün sepette olduğu listeleniyor. */
+  const itemQuantity = document.querySelectorAll(".js-item-container").length;
+
+  const showQuantityElement = document.querySelectorAll(".js-show-items");
+
+  showQuantityElement.forEach((element) => {
+    element.innerText = `${itemQuantity} items`;
+  });
+
+  // Items cost hesaplanması
+  let cost = 0;
+
+  document
+    .querySelectorAll('[class*="js-product-price-"]')
+    .forEach((priceValue) => {
+      console.log(priceValue.innerText);
+
+      cost = Number(priceValue.innerText) + cost;
+    });
+
+  document.querySelector(
+    ".js-order-summary-price"
+  ).innerText = `$${cost.toFixed(2)}`;
+
+  // Total before tax hesaplanması
+  const totalBeforeTax = cost + 4.99;
+
+  document.querySelector(
+    ".js-order-summary-price-tax"
+  ).innerText = `$${totalBeforeTax.toFixed(2)}`;
+
+  // Estimated tax hesaplanması
+  const estimatedTax = (Number(totalBeforeTax) * 10) / 100;
+
+  document.querySelector(
+    ".js-order-summary-price-estimated-tax"
+  ).innerText = `$${estimatedTax.toFixed(2)}`;
+
+  // Order total hesaplanması
+  let totalCost = totalBeforeTax + Number(estimatedTax);
+
+  document.querySelector(
+    ".js-order-summary-total-cost"
+  ).innerText = `$${totalCost.toFixed(2)}`;
+};
+
 export const showQuantity = (quantity) => {
   let optionElement = "";
   for (let i = 1; i <= 9; i++) {
@@ -539,6 +588,8 @@ export const updateQuantity = () => {
               });
             }
           });
+
+          orderSummary();
 
           saveLocalStorage();
         }
