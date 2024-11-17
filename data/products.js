@@ -514,8 +514,6 @@ export const orderSummary = () => {
   document
     .querySelectorAll('[class*="js-product-price-"]')
     .forEach((priceValue) => {
-      console.log(priceValue.innerText);
-
       cost = Number(priceValue.innerText) + cost;
     });
 
@@ -617,6 +615,29 @@ export const productPrice = (productPrice, quantity, productId) => {
 
   // jsProductPrice mevcut değilse
   return result;
+};
+
+export const deleteProduct = () => {
+  document
+    .querySelectorAll('[class*="js-delete-product"]')
+    .forEach((product) => {
+      product.addEventListener("click", () => {
+        const productId = product.dataset.productId;
+
+        const jsItemContainer = document.querySelector(".js-item-container");
+        jsItemContainer.remove();
+
+        cart.forEach((cartItem) => {
+          if (cartItem.productId == productId) {
+            // cart nesnesinin içeriği tekrar oluşturuluyor.
+            cart = cart.filter((item) => item.productId !== productId);
+          }
+        });
+
+        orderSummary();
+        saveLocalStorage();
+      });
+    });
 };
 
 export const saveLocalStorage = () => {
