@@ -547,7 +547,7 @@ export const orderSummary = () => {
 
 export const showQuantity = (quantity) => {
   let optionElement = "";
-  for (let i = 1; i <= 9; i++) {
+  for (let i = 1; i <= 10; i++) {
     if (i == quantity) {
       optionElement += `<option selected value=${i}>${i}</option>`;
       continue;
