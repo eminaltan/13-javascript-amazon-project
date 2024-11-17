@@ -6,6 +6,7 @@ import {
   cart,
   productPrice,
   orderSummary,
+  deleteProduct,
 } from "../data/products.js";
 
 getLocalStorage();
@@ -58,7 +59,9 @@ matchingProducts.forEach((cartItem) => {
             <span class="update-quantity-link link-primary js-update-quantity" data-product-id=${
               cartItem.product.id
             }>Update</span>
-            <span class="delete-quantity-link link-primary">Delete</span>
+            <span class="delete-quantity-link link-primary js-delete-product" data-product-id=${
+              cartItem.product.id
+            }>Delete</span>
           </div>
         </div>
 
@@ -101,3 +104,4 @@ document.querySelector(".js-order-summary").innerHTML = listingProduct;
 
 updateQuantity();
 orderSummary();
+deleteProduct();
