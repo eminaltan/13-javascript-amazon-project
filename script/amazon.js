@@ -5,6 +5,9 @@ import {
   saveLocalStorage,
 } from "../data/products.js";
 
+/*[ ] cart için data/cart.js adlı bir dosya oluştur ve cart içeriğinin boş olması durumunda varsayılan 2 ürünü checkout sayfasında render et.
+[ ] document.querySelectorAll(".js-add-to-cart").forEach((button) => {})) bölümü için addProductItem() adında bir fonksiyon oluştur ve butona basıldığında ürün ekleme işlemlerini bu fonksiyon gerçekleştirsin.
+*/
 let productHTML = "";
 
 products.forEach((element) => {
@@ -84,6 +87,7 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
       cart.push({
         productId,
         quantity: Number(quantity),
+        deliveryOptionId: "1",
       });
     }
 

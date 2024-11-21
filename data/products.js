@@ -1,5 +1,6 @@
 // TODO: Delete işlemi için method oluştur.
 
+import formatCurrency from "../script/formatCurrency.js";
 export let cart = [];
 export const products = [
   {
@@ -519,28 +520,28 @@ export const orderSummary = () => {
 
   document.querySelector(
     ".js-order-summary-price"
-  ).innerText = `$${cost.toFixed(2)}`;
+  ).innerText = `$${formatCurrency(cost)}`;
 
   // Total before tax hesaplanması
   const totalBeforeTax = cost + 4.99;
 
   document.querySelector(
     ".js-order-summary-price-tax"
-  ).innerText = `$${totalBeforeTax.toFixed(2)}`;
+  ).innerText = `$${formatCurrency(totalBeforeTax)}`;
 
   // Estimated tax hesaplanması
   const estimatedTax = (Number(totalBeforeTax) * 10) / 100;
 
   document.querySelector(
     ".js-order-summary-price-estimated-tax"
-  ).innerText = `$${estimatedTax.toFixed(2)}`;
+  ).innerText = `$${formatCurrency(estimatedTax)}`;
 
   // Order total hesaplanması
   let totalCost = totalBeforeTax + Number(estimatedTax);
 
   document.querySelector(
     ".js-order-summary-total-cost"
-  ).innerText = `$${totalCost.toFixed(2)}`;
+  ).innerText = `$${formatCurrency(totalCost)}`;
 };
 
 export const showQuantity = (quantity) => {
@@ -596,7 +597,7 @@ export const updateQuantity = () => {
 };
 
 export const productPrice = (productPrice, quantity, productId) => {
-  let result = ((productPrice * quantity) / 100).toFixed(2);
+  let result = (formatCurrency((productPrice * quantity) / 100));
 
   const jsProductPrice = document.querySelector(
     `.js-product-price-${productId}`
@@ -604,7 +605,7 @@ export const productPrice = (productPrice, quantity, productId) => {
 
   if (quantity === undefined) {
     // İlk render sırasında
-    return `$${(productPrice / 100).toFixed(2)}`;
+    return `$${formatCurrency(productPrice / 100)}`;
   }
 
   if (jsProductPrice) {
